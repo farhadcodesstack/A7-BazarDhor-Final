@@ -1,4 +1,4 @@
-// বাজার ডাটার টাইপ
+// bazar er type
 export interface Market {
   market: string;
   division: string;
@@ -6,13 +6,13 @@ export interface Market {
   max: number;
 }
 
-// দামের পরিবর্তনের টাইপ
+// price changer er type
 export interface PriceChange {
   dir: 'up' | 'down' | 'flat';
   pct: number;
 }
 
-// প্রধান পণ্য (Product) টাইপ
+// Product er main type
 export interface Product {
   id: number;
   slug: string;
@@ -30,7 +30,7 @@ export interface Product {
   markets: Market[];
 }
 
-// ক্যাটাগরি (Category) টাইপ
+// Category er type
 export interface Category {
   id: number | string;
   name: string;
@@ -39,7 +39,7 @@ export interface Category {
   slug?: string;
 }
 
-// ProductCard Props টাইপ
+// ProductCard Props er type
 export interface ProductCardProps {
   item: Product;
 }

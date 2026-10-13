@@ -1,10 +1,12 @@
-import React from 'react';
-import ProductCard from './ProductCard';
-import { Product } from '@/types/bazardor';
+import React from "react";
+import ProductCard from "./ProductCard";
+import { Product } from "@/types/bazardor";
 
 const getProducts = async (): Promise<Product[]> => {
   try {
-    const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+    const res = await fetch(
+      "https://api.abcz.workers.dev/api/bazardor/products",
+    );
     const data = await res.json();
     return Array.isArray(data) ? data : data?.products || data?.data || [];
   } catch (error) {
@@ -15,9 +17,10 @@ const getProducts = async (): Promise<Product[]> => {
 
 const IncreasedProducts = async () => {
   const products: Product[] = await getProducts();
-  
-  // যেকোনো 'any' ছাড়া স্ট্রংলি টাইপড ফিল্টারিং
-  const increased: Product[] = products.filter((item: Product) => item?.change?.dir === "up");
+
+  const increased: Product[] = products.filter(
+    (item: Product) => item?.change?.dir === "up",
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 my-6">

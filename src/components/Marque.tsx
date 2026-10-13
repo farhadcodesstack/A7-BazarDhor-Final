@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link"; 
 import { Product } from "@/types/bazardor";
 
-// বাংলা সংখ্যায় রূপান্তর করার ফিউশন
+
 const toBanglaNumeral = (num: number | string | undefined | null): string => {
   if (num === undefined || num === null) return "";
   const banglaDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -24,7 +25,7 @@ const getProducts = async (): Promise<Product[]> => {
 const Marque = async () => {
   const marqueText: Product[] = await getProducts();
   
-  // স্মুথ লুপের জন্য ডাটাগুলোকে ৩ বার ডুপ্লিকেট করা হয়েছে
+
   const duplicatedItems: Product[] = [...marqueText, ...marqueText, ...marqueText];
 
   return (
@@ -54,13 +55,15 @@ const Marque = async () => {
           const isDown = item?.change?.dir === "down";
 
           return (
-            <div
+          
+            <Link
               key={item.id ? `${item.id}-${index}` : index}
-              className="flex shrink-0 items-center gap-2.5 border-r border-gray-200 px-6 text-sm text-gray-800 whitespace-nowrap"
+              href={`/products/${item?.id}`}
+              className="flex shrink-0 items-center gap-2.5 border-r border-gray-200 px-6 text-sm text-gray-800 whitespace-nowrap hover:bg-gray-100/60 transition-colors cursor-pointer"
             >
               <span className="text-base">{item?.image || item?.categoryIcon || "🛒"}</span>
 
-              <span className="font-semibold text-gray-900">
+              <span className="font-semibold text-gray-900 hover:text-green-600 transition-colors">
                 {item?.nameBn}
               </span>
 
@@ -80,7 +83,7 @@ const Marque = async () => {
                 {isUp ? "▲" : isDown ? "▼" : "—"}{" "}
                 {toBanglaNumeral(Math.abs(item?.change?.pct || 0))}%
               </span>
-            </div>
+            </Link>
           );
         })}
       </div>
