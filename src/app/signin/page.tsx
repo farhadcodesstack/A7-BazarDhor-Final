@@ -1,6 +1,30 @@
+'use client'
+import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
 
 const SignInPage = () => {
+	const handleOnSubmit =async(e:React.SubmitEvent<HTMLElement>)=>{
+			e.preventDefault()
+
+			const formData = new FormData(e.target)
+			const user = Object.fromEntries(formData.entries()) as {email:string,password:string}
+			const {data,error} =await authClient.signIn.email({
+				email:user.email,
+				password:user.password,
+				callbackURL:'/'
+			})
+			if(data){
+				console.log('Data:',data)
+				alert('সাইন ইন সফল হয়েছে!')
+				window.location.href = '/'
+			}
+			if(error){
+				console.log('Error:',error)
+				alert('ইমেইল অথবা পাসওয়ার্ড ভুল!')
+				return
+			}
+
+	}
 	return (
 		<div className='flex flex-col items-center justify-center min-h-[85vh] px-4 py-8 bg-gray-50'>
 			<div className='bg-white border border-gray-100 rounded-2xl p-8 shadow-sm w-full max-w-md'>
@@ -8,7 +32,7 @@ const SignInPage = () => {
 					সাইন ইন করুন
 				</h2>
 
-				<form className='space-y-4'>
+				<form onSubmit={handleOnSubmit} className='space-y-4'>
 					<div>
 						<label className='block text-sm font-medium text-gray-700 mb-1.5'>
 							ইমেইল

@@ -2,7 +2,7 @@
 import Image from 'next/image'
 
 const Banner = () => {
-	// সরাসরি ব্রাউজার বা ক্লায়েন্টে তারিখ পাওয়ার নিরাপদ উপায় (useEffect ছাড়াই)
+	
 	const date =
 		typeof window !== 'undefined'
 			? new Date().toLocaleDateString('bn-BD', { dateStyle: 'full' })

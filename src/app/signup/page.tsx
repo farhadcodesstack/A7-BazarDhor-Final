@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 const SignUpPage = () => {
 	const router = useRouter()
-	const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleOnsubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		const formData = new FormData(e.currentTarget)
