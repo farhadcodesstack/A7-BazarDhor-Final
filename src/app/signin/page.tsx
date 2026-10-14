@@ -1,6 +1,7 @@
 'use client'
 import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 const SignInPage = () => {
 	const handleOnSubmit =async(e:React.SubmitEvent<HTMLElement>)=>{
@@ -15,12 +16,12 @@ const SignInPage = () => {
 			})
 			if(data){
 				console.log('Data:',data)
-				alert('সাইন ইন সফল হয়েছে!')
+				toast.success('সাইন ইন সফল হয়েছে!')
 				window.location.href = '/'
 			}
 			if(error){
 				console.log('Error:',error)
-				alert('ইমেইল অথবা পাসওয়ার্ড ভুল!')
+				toast.error('ইমেইল অথবা পাসওয়ার্ড ভুল!')
 				return
 			}
 
