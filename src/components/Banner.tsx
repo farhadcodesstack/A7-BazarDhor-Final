@@ -1,10 +1,13 @@
+'use client';
+
 import Image from "next/image";
 import React from "react";
 
-const Banner = async () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
+const Banner = () => {
+  // সরাসরি ব্রাউজার বা ক্লায়েন্টে তারিখ পাওয়ার নিরাপদ উপায় (useEffect ছাড়াই)
+  const date = typeof window !== "undefined" 
+    ? new Date().toLocaleDateString("bn-BD", { dateStyle: "full" })
+    : "আজকের তারিখ";
 
   return (
     <div className="max-w-7xl mx-auto px-4 my-6">
@@ -19,7 +22,7 @@ const Banner = async () => {
           </h1>
 
           <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
-            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
+            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক 
             বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
