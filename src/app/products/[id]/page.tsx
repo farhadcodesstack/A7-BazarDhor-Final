@@ -36,6 +36,8 @@ const getSingleProduct = async (id: string): Promise<Product | null> => {
   }
 };
 
+
+
 interface ProductDetailsProps {
   params: Promise<{
     id: string;
@@ -83,6 +85,8 @@ const ProductDetailsPage = async ({ params }: ProductDetailsProps) => {
       : product?.today
         ? product.today + 5
         : 0;
+
+		
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">

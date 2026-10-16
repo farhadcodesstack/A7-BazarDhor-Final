@@ -9,7 +9,7 @@ interface CategoryPageProps {
 	}>
 }
 
-// ক্যাটাগরি slug থেকে বাংলায় সুন্দর নাম দেখানোর অবজেক্ট
+
 const CATEGORY_NAME_MAP: Record<string, string> = {
 	chal: 'চাল',
 	dal: 'ডাল',
@@ -22,13 +22,13 @@ const CATEGORY_NAME_MAP: Record<string, string> = {
 	dairy: 'ডেয়ারি ও দুধ',
 }
 
-// API থেকে পণ্য ফেচ করার ফাংশন
+
 const getProducts = async (): Promise<Product[]> => {
 	try {
 		const res = await fetch(
 			'https://api.abcz.workers.dev/api/bazardor/products',
 			{
-				cache: 'no-store', // ক্যাশিং বন্ধ রাখবে
+				cache: 'no-store', 
 			},
 		)
 
@@ -45,13 +45,13 @@ const getProducts = async (): Promise<Product[]> => {
 }
 
 const CategoryProductsPage = async ({ params }: CategoryPageProps) => {
-	// Next.js 15+ এ params একটি Promise
+	
 	const { slug } = await params
 	const decodedSlug = decodeURIComponent(slug).toLowerCase()
 
 	const products = await getProducts()
 
-	// ক্যাটাগরির slug বা category নাম অনুযায়ী পণ্য ফিল্টার (Case-insensitive)
+	
 	const filteredProducts = products.filter((item) => {
 		const itemCategory = item.category?.toString().toLowerCase() || ''
 		const itemSlug = item.slug?.toString().toLowerCase() || ''
@@ -59,12 +59,12 @@ const CategoryProductsPage = async ({ params }: CategoryPageProps) => {
 		return itemCategory === decodedSlug || itemSlug === decodedSlug
 	})
 
-	// ক্যাটাগরির সুন্দর ডিসপ্লে নেম
+	
 	const displayName = CATEGORY_NAME_MAP[decodedSlug] || decodedSlug
 
 	return (
 		<div className='max-w-7xl mx-auto px-4 py-8'>
-			{/* ব্রেডক্রাম্ব এবং ব্যাক লিঙ্ক */}
+			
 			<div className='mb-6'>
 				<Link
 					href='/'
@@ -74,7 +74,6 @@ const CategoryProductsPage = async ({ params }: CategoryPageProps) => {
 				</Link>
 			</div>
 
-			{/* ক্যাটাগরি হেডার */}
 			<div className='bg-white border border-gray-100 rounded-2xl p-6 mb-8 shadow-sm'>
 				<h1 className='text-2xl sm:text-3xl font-bold text-gray-900 capitalize'>
 					{displayName}{' '}
@@ -89,7 +88,7 @@ const CategoryProductsPage = async ({ params }: CategoryPageProps) => {
 				</p>
 			</div>
 
-			{/* প্রোডাক্ট গ্রিড */}
+			
 			{filteredProducts.length > 0 ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
 					{filteredProducts.map((item) => (
@@ -97,7 +96,7 @@ const CategoryProductsPage = async ({ params }: CategoryPageProps) => {
 					))}
 				</div>
 			) : (
-				/* কোনো প্রোডাক্ট না থাকলে */
+				
 				<div className='text-center py-16 bg-white rounded-2xl border border-gray-100 shadow-sm p-6'>
 					<div className='max-w-md mx-auto'>
 						<h3 className='text-lg font-semibold text-gray-800 mb-2'>
